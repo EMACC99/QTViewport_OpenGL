@@ -63,7 +63,7 @@ namespace ejemplos{
 
         default:
             QMessageBox::critical(0, "OpenGL ejemplos", 
-                                            "El ejemplo que pusiste no existe", QMessageBox::Ok);
+                                "El ejemplo que pusiste no existe", QMessageBox::Ok);
             exit(0);
             break;
         }
