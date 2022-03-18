@@ -10,10 +10,12 @@ HEADERS+= includes/openglwindow.hpp includes/gl_debug.hpp includes/ejemplos.hpp
 QMAKE_CXXFLAGS+= -std=c++17 -g -Wno-deprecated-declarations
 
 CONFIG += debug
-QMAKE_CXXFLAGS_RELEASE -= -O2
-QMAKE_CXXFLAGS_RELEASE += -Os
+#CONFIG += release
+#QMAKE_CXXFLAGS_RELEASE -= -O2
+#QMAKE_CXXFLAGS_RELEASE += -Os
 MOC_DIR = tmp/moc/
 OBJECTS_DIR = tmp/obj/
+
 macx {
 	LIBS += -framework OpenGL
 
@@ -21,5 +23,5 @@ macx {
 else{
 	LIBS += -lGL -lglut -lGLU
 }
-TARGET = openglwindow
 
+TARGET = openglwindow
