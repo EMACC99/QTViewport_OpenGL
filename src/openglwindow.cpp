@@ -9,8 +9,8 @@
 
 using namespace std::chrono_literals;
 
-MainWindow::MainWindow(QWindow *parent) : QOpenGLWindow(new QOpenGLContext, QOpenGLWindow::NoPartialUpdate, parent)
-{
+MainWindow::MainWindow(QWindow *parent) : QOpenGLWindow(new QOpenGLContext, QOpenGLWindow::NoPartialUpdate, parent){
+
     this->setSurfaceType(QWindow::OpenGLSurface);
 
     QSurfaceFormat format;
@@ -20,16 +20,17 @@ MainWindow::MainWindow(QWindow *parent) : QOpenGLWindow(new QOpenGLContext, QOpe
 
     this->create();
     qDebug() << context();
-    this->initializeGL();
+    // this->initializeGL(); // this causes a segfault bc calling a virtual method during construction bypasses a virtual dispacth and this is dangerous
 
     connect(&this->timer, SIGNAL(timeout()), this, SLOT(update()));
     timer.start(100ms);
 }
 
-MainWindow::~MainWindow() = default; 
+MainWindow::~MainWindow() {
+}
 
 void MainWindow::initializeGL(){ 
-        resizeGL(this->width(), this->height());
+        // resizeGL(this->width(), this->height());  //same as above
         // ejemplos::initialize_ejemplo(2, &(this -> list));
         ejemplos::initialize_ejemplo(4);
     }
