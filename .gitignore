@@ -33,6 +33,10 @@
 
 #QT
 .qmake.stash
+Makefile
+
+#Target
+openglwindow
 
 #IDE
 .vscode/*
