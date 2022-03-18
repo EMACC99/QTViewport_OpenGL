@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
-#include <GL/gl.h>
+#ifdef __APPLE__
+    #include <OpenGL/gl.h>
+#else
+    #include <GL/gl.h>
+#endif
 
 inline void gl_clear_errors()
 {

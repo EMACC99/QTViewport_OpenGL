@@ -3,7 +3,13 @@
 #include <QString>
 #include <QSurfaceFormat>
 #include <QTimer>
-#include <GL/glu.h>
+
+#ifdef __APPLE__
+    #include <OpenGL/glu.h>
+#else
+    #include <GL/glu.h>
+#endif
+
 #include <QOpenGLFunctions>
 #include <QOpenGLWindow>
 #include <QtOpenGL>
