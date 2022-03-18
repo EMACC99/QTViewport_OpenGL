@@ -1,4 +1,4 @@
-#include "ejemplos.hpp"
+#include "includes/ejemplos.hpp"
 
 namespace ejemplos{
     namespace{
@@ -59,8 +59,12 @@ namespace ejemplos{
         case 4:
             ejemplo4_init();
             ejemplo4();
+            break;
 
         default:
+            QMessageBox::critical(0, "OpenGL ejemplos", 
+                                            "El ejemplo que pusiste no existe", QMessageBox::Ok);
+            exit(0);
             break;
         }
     }

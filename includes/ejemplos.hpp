@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QMessageBox>
+
 #ifdef __APPLE__
     #include <OpenGL/glu.h>
 #else

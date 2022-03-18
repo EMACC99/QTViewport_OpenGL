@@ -1,6 +1,6 @@
-#include "gl_debug.hpp"
-#include "openglwindow.hpp"
-#include "ejemplos.hpp"
+#include "includes/gl_debug.hpp"
+#include "includes/openglwindow.hpp"
+#include "includes/ejemplos.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -31,7 +31,7 @@ MainWindow::~MainWindow() = default;
 void MainWindow::initializeGL(){ 
         resizeGL(this->width(), this->height());
         // ejemplos::initialize_ejemplo(2, &(this -> list));
-        ejemplos::initialize_ejemplo(4);
+        ejemplos::initialize_ejemplo(8);
     }
 
 void MainWindow::resizeGL(int w, int h){

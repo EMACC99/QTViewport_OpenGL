@@ -4,7 +4,7 @@ https://www.youtube.com/watch?v=6eu8oMULqaU
 Tutoriales de Parwiz Forogh
 ****************************************************************************/
 
-#include "openglwindow.hpp"
+#include "includes/openglwindow.hpp"
 #include <QApplication>
 
 int main(int argc, char **argv)
