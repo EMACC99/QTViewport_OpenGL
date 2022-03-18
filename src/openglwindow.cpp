@@ -31,7 +31,7 @@ MainWindow::~MainWindow() = default;
 void MainWindow::initializeGL(){ 
         resizeGL(this->width(), this->height());
         // ejemplos::initialize_ejemplo(2, &(this -> list));
-        ejemplos::initialize_ejemplo(8);
+        ejemplos::initialize_ejemplo(4);
     }
 
 void MainWindow::resizeGL(int w, int h){
