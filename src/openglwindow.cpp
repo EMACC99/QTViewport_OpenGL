@@ -45,7 +45,7 @@ void MainWindow::resizeGL(int w, int h){
 }
 
 void MainWindow::paintGL(){
-    ejemplos::initialize_ejemplo(this -> example, &(this -> list));
+    ejemplos::ejemplo(this -> example, &(this -> list));
 }
 
 
