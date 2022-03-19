@@ -9,7 +9,9 @@
 
 using namespace std::chrono_literals;
 
-MainWindow::MainWindow(QWindow *parent) : QOpenGLWindow(new QOpenGLContext, QOpenGLWindow::NoPartialUpdate, parent){
+MainWindow::MainWindow(const int &example, QWindow *parent) : QOpenGLWindow(new QOpenGLContext, QOpenGLWindow::NoPartialUpdate, parent){
+
+    this -> example = example;
 
     this->setSurfaceType(QWindow::OpenGLSurface);
 
@@ -30,9 +32,8 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::initializeGL(){ 
-        // resizeGL(this->width(), this->height());  //same as above
-        // ejemplos::initialize_ejemplo(2, &(this -> list));
-        ejemplos::initialize_ejemplo(4);
+        resizeGL(this->width(), this->height());
+        ejemplos::initialize_ejemplo(this -> example, &(this -> list));
     }
 
 void MainWindow::resizeGL(int w, int h){
@@ -44,23 +45,18 @@ void MainWindow::resizeGL(int w, int h){
 }
 
 void MainWindow::paintGL(){
-
-    // ejemplos::ejemplo2(&(this -> list));
-    ejemplos::ejemplo4();
+    ejemplos::initialize_ejemplo(this -> example, &(this -> list));
 }
 
 
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
-{
+void MainWindow::mouseMoveEvent(QMouseEvent *event){
     // dosmth
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-    switch (event->key())
-    {
+void MainWindow::keyPressEvent(QKeyEvent *event){
+    switch (event->key()){
     case Qt::Key_D:
-        // dosmth
+        // rotate or smth
         break;
     }
 }

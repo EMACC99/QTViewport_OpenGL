@@ -18,7 +18,7 @@ class MainWindow : public QOpenGLWindow{
     
     Q_OBJECT
 public:
-    MainWindow(QWindow *parent = 0);
+    MainWindow(const int &example, QWindow *parent = 0);
     ~MainWindow();
 
 protected:
@@ -33,4 +33,5 @@ private:
     QTimer timer;
     QOpenGLFunctions *gl;
     int list;
+    int example;
 };
