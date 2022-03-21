@@ -6,10 +6,10 @@ namespace ejemplos{
         void ejemplo1_init(){}
 
         void ejemplo2_init(int *list){
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
+            // glMatrixMode(GL_PROJECTION);
+            // glLoadIdentity();
 
-            gluLookAt(1.5f, 1.0f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
+            // gluLookAt(1.5f, 1.0f, 1.f, 0.f, 0.f, 0.f, 0.f, 1.f, 0.f);
 
             glMatrixMode(GL_MODELVIEW);
 
