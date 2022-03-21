@@ -12,13 +12,14 @@
 
 #include <QOpenGLFunctions>
 #include <QOpenGLWindow>
+#include <QOpenGLWidget>
 #include <QtOpenGL>
 
-class MainWindow : public QOpenGLWindow{
+class MainWindow : public QOpenGLWidget{
     
     Q_OBJECT
 public:
-    MainWindow(const int &example, QWindow *parent = 0);
+    MainWindow(const int &example, QWidget *parent = 0);
     ~MainWindow();
 
 protected:

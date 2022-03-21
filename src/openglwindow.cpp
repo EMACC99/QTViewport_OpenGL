@@ -9,12 +9,13 @@
 
 using namespace std::chrono_literals;
 
-MainWindow::MainWindow(const int &example, QWindow *parent) : QOpenGLWindow(new QOpenGLContext, QOpenGLWindow::NoPartialUpdate, parent){
+MainWindow::MainWindow(const int &example, QWidget *parent) : QOpenGLWidget(parent){
 
     this -> example = example;
-
-    this->setSurfaceType(QWindow::OpenGLSurface);
-
+    this -> setUpdateBehavior(QOpenGLWidget::NoPartialUpdate);
+    
+    // this->setSurfaceType(QWindow::OpenGLSurface);
+    // this -> 
     QSurfaceFormat format;
     format.setProfile(QSurfaceFormat::CompatibilityProfile);
     format.setVersion(2, 1);
@@ -50,7 +51,7 @@ void MainWindow::paintGL(){
 
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event){
-    // dosmth
+    // qDebug() << event->buttons(); 
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event){
