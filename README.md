@@ -5,7 +5,7 @@ A simple QT viewport for OpenGL
 ## Requirements
 
 * g++ or clang++
-* Qt >= 5.15
+* Qt >= 5.15 [^1]
 * qmake
 * OpenGL
 
@@ -40,3 +40,5 @@ This will generate an executable named `openglwindow` on Linux or `openglwindow.
     ```sh
     open openglwindow.app
     ```
+[^1]: Using QT6 is posible you just need to do the following:
+    `<QtWidgets/QAction>` for `<QtGui/QAction>` in the file UI/select_example.hpp
