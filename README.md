@@ -17,6 +17,12 @@ Clone the repo
 git clone https://github.com/EMACC99/QTViewport_OpenGL
 ```
 
+Then change to the folder repo with
+
+```sh
+cd QTViewport_OpenGL
+```
+
 ### Compilation
 
 To compile just run
