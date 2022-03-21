@@ -11,6 +11,12 @@ A simple QT viewport for OpenGL
 
 ## Instructions
 
+Clone the repo
+
+```sh
+git clone https://github.com/EMACC99/QTViewport_OpenGL
+```
+
 ### Compilation
 
 To compile just run
