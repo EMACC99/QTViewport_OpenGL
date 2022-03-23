@@ -11,6 +11,13 @@ HEADERS+= includes/openglwindow.hpp includes/gl_debug.hpp includes/ejemplos.hpp 
 QMAKE_CXXFLAGS+= -std=c++17 -g -Wno-deprecated-declarations
 
 CONFIG += debug
+<<<<<<< Updated upstream
+=======
+
+# make a mac debug build instead of an .app
+CONFIG -= app_bundle
+
+>>>>>>> Stashed changes
 #CONFIG += release
 #QMAKE_CXXFLAGS_RELEASE -= -O2
 #QMAKE_CXXFLAGS_RELEASE += -Os
