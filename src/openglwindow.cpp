@@ -46,7 +46,7 @@ void MainWindow::resizeGL(int w, int h){
 }
 
 void MainWindow::paintGL(){
-    ejemplos::ejemplo(this -> example, &(this -> list));
+    ejemplos::ejemplo(this -> example, &(this -> list), this -> rotate, &(this -> initial_roation));
 }
 
 
