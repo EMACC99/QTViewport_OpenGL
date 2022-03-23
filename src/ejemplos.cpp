@@ -1,4 +1,5 @@
 #include "includes/ejemplos.hpp"
+#include "includes/gl_debug.hpp"
 
 namespace ejemplos{
     namespace{
@@ -35,7 +36,33 @@ namespace ejemplos{
         void ejemplo4_init(){
             glEnable(GL_CULL_FACE);
             glCullFace(GL_BACK);
-        }    
+        }
+
+        void ejemplo5_init(){
+            /*Lighting*/
+            glShadeModel(GL_SMOOTH);
+            glEnable(GL_DEPTH_TEST); // Enables Depth Testing
+            glEnable(GL_LIGHTING);   // Enable Lighting
+            glDepthFunc(GL_LEQUAL);  // The Type Of Depth Testing To Do
+            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+            /*Light values*/
+            GLfloat LightAmbient[]= { 0.5f, 0.5f, 0.5f, 1.0f };
+            GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f };
+            GLfloat LightPosition[]= { 0.0f, 0.0f, 2.0f, 1.0f };
+            /*Setting light values*/
+            glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
+            glLightfv(GL_LIGHT1,GL_DIFFUSE,LightDiffuse);
+            GLfloat red[]= { 1.0f, 0.0f, 0.0f, 1.0f };
+            //glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
+            glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);
+            glEnable(GL_LIGHT1);
+            glEnable(GL_LIGHT0);
+            /*Setting back-culling*/
+            glEnable(GL_CULL_FACE);
+            glCullFace(GL_BACK);
+            /*****/
+        }
+
         void ejemplo1(){
             glMatrixMode(GL_MODELVIEW);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Screen and Depth Buffers
@@ -121,6 +148,81 @@ namespace ejemplos{
             glFlush();
 
         }
+
+        void ejemplo5(const bool &rotate, float *inital_rotation){
+            glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear The Screen And The Depth Buffer
+            glLoadIdentity();                   // Reset The View
+
+            GLfloat red[] = {1.0f, 0.0f, 0.0f, 1.0f};
+            GLfloat green[]={0.0f,1.0f,0.0f,1.0f};
+            GLfloat blue[]={0.0f,0.0f,1.0f,1.0f};
+            GLfloat orange[]={1.0f,0.5f,0.0f,1.0f};
+            GLfloat yellow[]={1.0f,1.0f,0.0f,1.0f};
+            GLfloat violet[]={1.0f,0.0f,1.0f,1.0f};
+
+            glTranslatef(1.5f,0.0f,-7.0f);              // Move Right And Into The Screen
+
+            if (rotate){
+                glRotatef(*inital_rotation, 1.f,1.f, 1.f);
+                *inital_rotation += rotation_factor;
+                std::cout << *inital_rotation << "\n";
+            }
+            else
+                glRotatef(25.0f,1.0f,1.0f,1.0f);            // Rotate The Cube On X, Y & Z
+
+            glBegin(GL_QUADS);                  // Start Drawing The Cube
+                glNormal3f( 0.0f, 1.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, green ); // Sets diffuse component of material to green
+
+                glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Top)
+                glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Top)
+                glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
+                glVertex3f( 1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+
+                glNormal3f( 0.0f,-1.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, orange );// Sets diffuse component of material to orange
+
+                glVertex3f( 1.0f,-1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
+                glVertex3f(-1.0f,-1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
+                glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Bottom)
+                glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Bottom)
+
+                glNormal3f( 0.0f, 0.0f, 1.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, red );// Sets diffuse component of material to red
+
+                glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
+                glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
+                glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
+                glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Front)
+
+                glNormal3f( 0.0f, 0.0f,-1.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, yellow );// Sets diffuse component of material to yellow
+
+                glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Back)
+                glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Back)
+                glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Back)
+                glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Back)
+
+                glNormal3f(-1.0f, 0.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, blue );// Sets diffuse component of material to blue
+
+                glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
+                glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Left)
+                glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Left)
+                glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
+
+                glNormal3f( 1.0f, 0.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, violet );// Sets diffuse component of material to violet
+
+                glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Right)
+                glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Right)
+                glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Right)
+                glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Right)
+            glEnd();                        // Done Drawing The Quad
+            glFlush();
+        }
     }
 
     void initialize_ejemplo(const int &ejemplo, int *list){
@@ -145,6 +247,10 @@ namespace ejemplos{
             // ejemplo4();
             break;
         }
+        case 5: {
+            ejemplo5_init();
+            break;
+        }
         default:{
             // throw "Este ejemplo no existe";
             break;
@@ -152,7 +258,7 @@ namespace ejemplos{
         }
     }
     
-    void ejemplo(const int &ejemplo, int *list){
+    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation){
         switch (ejemplo){
         
         case 1: {
@@ -168,6 +274,10 @@ namespace ejemplos{
         }
         case 4: {
             ejemplo4();
+            break;
+        }
+        case 5: {
+            ejemplo5(rotate, initial_rotation);
             break;
         }
         default: {

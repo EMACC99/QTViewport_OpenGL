@@ -35,4 +35,6 @@ private:
     QOpenGLFunctions *gl;
     int list;
     int example;
+    bool rotate = true;
+    float initial_roation = 0.f;
 };
