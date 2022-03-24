@@ -15,6 +15,8 @@
 #include <QOpenGLWidget>
 #include <QtOpenGL>
 
+constexpr float rotate = 5.f;
+
 class MainWindow : public QOpenGLWidget{
     
     Q_OBJECT

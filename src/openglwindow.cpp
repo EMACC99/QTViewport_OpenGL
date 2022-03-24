@@ -59,7 +59,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     case Qt::Key_D:
         // rotate or smth
         this -> auto_rotate = false;
-        this -> initial_roation += 10;
+        this -> initial_roation += rotate;
 
         // this -> rotate_axis[0] = 0.f;
         this -> rotate_axis[1] = 1.f;
@@ -69,7 +69,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
     case Qt::Key_A:
         this -> auto_rotate = false;
-        this -> initial_roation -= 10;
+        this -> initial_roation -= rotate;
         
         // this -> rotate_axis[0] = 0.f;
         this -> rotate_axis[1] = 1.f;
@@ -79,19 +79,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     
     case Qt::Key_W:
         this -> auto_rotate = false;
-        this -> initial_roation += 10;
+        this -> initial_roation += rotate;
 
         this -> rotate_axis[0] = 1.f;
-        // this -> rotate_axis[1] = 0.f;
+        this -> rotate_axis[1] = 0.f;
         this -> rotate_axis[2] = 0.f; 
         break;
 
     case Qt::Key_S:
         this -> auto_rotate = false;
-        this -> initial_roation -= 10;
+        this -> initial_roation -= rotate;
 
         this -> rotate_axis[0] = 1.f;
-        // this -> rotate_axis[1] = 0.f;
+        this -> rotate_axis[1] = 0.f;
         this -> rotate_axis[2] = 0.f; 
         break;
 

@@ -123,6 +123,7 @@ namespace ejemplos{
             // glRotatef(50.0f,0.0f,1.0f,0.0f);             // Rotate The Pyramid On It's Y Axis
             if (rotate)
                 *initial_rotation += rotation_factor;
+            
             glRotatef(*initial_rotation, x, y, z);
 
             glBegin(GL_TRIANGLES);                  // Start Drawing The Pyramid
