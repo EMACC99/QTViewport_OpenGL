@@ -46,7 +46,7 @@ void MainWindow::resizeGL(int w, int h){
 }
 
 void MainWindow::paintGL(){
-    ejemplos::ejemplo(this -> example, &(this -> list), this -> rotate, &(this -> initial_roation));
+    ejemplos::ejemplo(this -> example, &(this -> list), this -> auto_rotate, &(this -> initial_roation), this -> rotate_axis);
 }
 
 
@@ -58,6 +58,49 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     switch (event->key()){
     case Qt::Key_D:
         // rotate or smth
+        this -> auto_rotate = false;
+        this -> initial_roation += 10;
+
+        // this -> rotate_axis[0] = 0.f;
+        this -> rotate_axis[1] = 1.f;
+        this -> rotate_axis[2] = 0.f;
+        
+        break;
+
+    case Qt::Key_A:
+        this -> auto_rotate = false;
+        this -> initial_roation -= 10;
+        
+        // this -> rotate_axis[0] = 0.f;
+        this -> rotate_axis[1] = 1.f;
+        this -> rotate_axis[2] = 0.f;
+
+        break;
+    
+    case Qt::Key_W:
+        this -> auto_rotate = false;
+        this -> initial_roation += 10;
+
+        this -> rotate_axis[0] = 1.f;
+        // this -> rotate_axis[1] = 0.f;
+        this -> rotate_axis[2] = 0.f; 
+        break;
+
+    case Qt::Key_S:
+        this -> auto_rotate = false;
+        this -> initial_roation -= 10;
+
+        this -> rotate_axis[0] = 1.f;
+        // this -> rotate_axis[1] = 0.f;
+        this -> rotate_axis[2] = 0.f; 
+        break;
+
+    case Qt::Key_R:
+        this -> auto_rotate = true;
+        for (int i = 0; i < this -> rotate_axis.size(); ++i)
+            this -> rotate_axis[i] = 1.f;
+        
         break;
     }
+
 }

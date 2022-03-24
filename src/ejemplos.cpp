@@ -110,15 +110,21 @@ namespace ejemplos{
             glCallList(*list);
 
         }
-        void ejemplo4(){
+        void ejemplo4(const bool &rotate, float *initial_rotation, const std::array<float, 3> &rotate_axis){
             glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear The Screen And The Depth Buffer
             glLoadIdentity();                   // Reset The View
 
+            auto [x,y,z] = rotate_axis;
+
             // doesn't work with lighting
             glTranslatef(-1.5f,0.0f,-6.0f);             // Move Left And Into The Screen
-            glRotatef(50.0f,0.0f,1.0f,0.0f);             // Rotate The Pyramid On It's Y Axis
+            // glRotatef(50.0f,0.0f,1.0f,0.0f);             // Rotate The Pyramid On It's Y Axis
+            if (rotate)
+                *initial_rotation += rotation_factor;
+            glRotatef(*initial_rotation, x, y, z);
+
             glBegin(GL_TRIANGLES);                  // Start Drawing The Pyramid
                 glColor3f(1.0f,0.0f,0.0f);          // Red
                 glVertex3f( 0.0f, 1.0f, 0.0f);          // Top Of Triangle (Front)
@@ -149,7 +155,7 @@ namespace ejemplos{
 
         }
 
-        void ejemplo5(const bool &rotate, float *inital_rotation){
+        void ejemplo5(const bool &rotate, float *initial_rotation, const std::array<float, 3> &rotate_axis){
             glMatrixMode(GL_MODELVIEW);                     // Select The Modelview Matrix
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear The Screen And The Depth Buffer
@@ -164,13 +170,14 @@ namespace ejemplos{
 
             glTranslatef(1.5f,0.0f,-7.0f);              // Move Right And Into The Screen
 
-            if (rotate){
-                glRotatef(*inital_rotation, 1.f,1.f, 1.f);
-                *inital_rotation += rotation_factor;
-                std::cout << *inital_rotation << "\n";
-            }
-            else
-                glRotatef(25.0f,1.0f,1.0f,1.0f);            // Rotate The Cube On X, Y & Z
+            auto [x,y,z] = rotate_axis;
+            // std::cout << x << " " << y << " " << z <<  "\n";
+
+            if (rotate)
+                *initial_rotation += rotation_factor;
+            glRotatef(*initial_rotation, x, y, z);
+            
+            // glRotatef(25.0f,1.0f,1.0f,1.0f);            // Rotate The Cube On X, Y & Z
 
             glBegin(GL_QUADS);                  // Start Drawing The Cube
                 glNormal3f( 0.0f, 1.0f, 0.0f);
@@ -258,7 +265,7 @@ namespace ejemplos{
         }
     }
     
-    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation){
+    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation, const std::array<float, 3> &rotate_axis){
         switch (ejemplo){
         
         case 1: {
@@ -273,11 +280,12 @@ namespace ejemplos{
             break;
         }
         case 4: {
-            ejemplo4();
+            ejemplo4(rotate, initial_rotation, rotate_axis);
+
             break;
         }
         case 5: {
-            ejemplo5(rotate, initial_rotation);
+            ejemplo5(rotate, initial_rotation, rotate_axis);
             break;
         }
         default: {

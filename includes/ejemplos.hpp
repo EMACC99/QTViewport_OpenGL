@@ -1,5 +1,7 @@
 #pragma once
 
+#include <array>
+
 #ifdef __APPLE__
     #include <OpenGL/glu.h>
 #else
@@ -12,6 +14,6 @@ namespace ejemplos {
 
     void initialize_ejemplo(const int &ejemplo, int *list);
 
-    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation);
+    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation, const std::array<float, 3> &rotate_axis);
 
 }
