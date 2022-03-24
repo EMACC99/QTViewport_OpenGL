@@ -8,12 +8,12 @@ SOURCES += \
 
 HEADERS+= includes/openglwindow.hpp includes/gl_debug.hpp includes/ejemplos.hpp includes/select.hpp UI/select_example.hpp
 
-QMAKE_CXXFLAGS+= -std=c++17 -g -Wno-deprecated-declarations
+QMAKE_CXXFLAGS+= -std=c++17 -g -Wno-deprecated-declarations -Wall -Wpedantic -Wextra -Wno-sign-compare
 
 CONFIG += debug
 
 # make a mac debug build instead of an .app
-CONFIG -= app_bundle
+#CONFIG -= app_bundle
 #CONFIG += release
 #QMAKE_CXXFLAGS_RELEASE -= -O2
 #QMAKE_CXXFLAGS_RELEASE += -Os
