@@ -59,6 +59,8 @@ This will generate an executable named `openglwindow` on Linux or `openglwindow.
     ./openglwindow
     ```
 
-    If CONFIG -= app_bundle is uncommented on the `.pro` file
+    If `CONFIG -= app_bundle` is uncommented on the `.pro` file.
 
-[^1]: For QT6, change the line in `select_example.hpp` from `#include <QtWidgets/QAction>` to `#include <QtGui/QAction>` and add `QT +0 openglwidgets` to the `.pro` file
+[^1]: For QT6, change the line in `select_example.hpp` from
+    `#include <QtWidgets/QAction>` to
+    `#include <QtGui/QAction>` and add `QT += openglwidgets` to the `.pro` file
