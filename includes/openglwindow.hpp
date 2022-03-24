@@ -39,5 +39,5 @@ private:
     int example;
     bool auto_rotate = true;
     float initial_roation = 0.f;
-    std::array<float, 3> rotate_axis{1.f,1.f,1.f};
+    std::array<float, 3> rotate_axis{1.f,1.f,0.f};
 };
