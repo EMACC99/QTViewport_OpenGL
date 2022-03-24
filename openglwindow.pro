@@ -1,4 +1,4 @@
-QT+= core gui opengl widgets openglwidgets
+QT+= core gui opengl widgets
 
 SOURCES += \
     src/main.cpp\
