@@ -53,7 +53,7 @@ namespace ejemplos{
             glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
             glLightfv(GL_LIGHT1,GL_DIFFUSE,LightDiffuse);
             GLfloat red[]= { 1.0f, 0.0f, 0.0f, 1.0f };
-            //glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
+            glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
             glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);
             glEnable(GL_LIGHT1);
             glEnable(GL_LIGHT0);
@@ -237,12 +237,10 @@ namespace ejemplos{
         switch (ejemplo){
         case 1:{
             ejemplo1_init();
-            // ejemplo1();
             break;
         }
         case 2:{
             ejemplo2_init(list);
-            // ejemplo2(list);
             break;
         }
         case 3:{
@@ -252,7 +250,6 @@ namespace ejemplos{
         }
         case 4:{
             ejemplo4_init();
-            // ejemplo4();
             break;
         }
         case 5: {

@@ -9,7 +9,6 @@
 #endif
 
 constexpr float rotation_factor =  25.0;
-
 namespace ejemplos {
 
     void initialize_ejemplo(const int &ejemplo, int *list);
