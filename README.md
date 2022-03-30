@@ -65,11 +65,11 @@ This will generate an executable named `openglwindow` on Linux or `openglwindow.
 
 Currently the only intercations provided are:
 
-* W: Rotate up the object
-* A: Rotate left
-* S: Rotate down
-* D: Rotate right
-* R: Auto rotate
+* `W`: Rotate up the object
+* `A`: Rotate left
+* `S`: Rotate down
+* `D`: Rotate right
+* `R`: Auto rotate
 
 Currently, the only things that have this intercations are `ejemplo 4` and `ejemplo 5`
 
