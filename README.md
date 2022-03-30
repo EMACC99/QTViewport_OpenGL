@@ -61,6 +61,27 @@ This will generate an executable named `openglwindow` on Linux or `openglwindow.
 
     If `CONFIG -= app_bundle` is uncommented on the `.pro` file.
 
+## Intercactions
+
+Currently the only intercations provided are:
+
+* W: Rotate up the object
+* A: Rotate left
+* S: Rotate down
+* D: Rotate right
+* R: Auto rotate
+
+Currently, the only things that have this intercations are `ejemplo 4` and `ejemplo 5`
+
+## Interface
+
+To run something, just select it from the drop down.
+
+![select_window](images/interface_1.png)
+![drop_down](images/drop_down.png)
+
+![cube](images/cube_rotation.gif)
+
 [^1]: For QT6, change the line in `select_example.hpp` from
     `#include <QtWidgets/QAction>` to
     `#include <QtGui/QAction>` and add `QT += openglwidgets` to the `.pro` file
