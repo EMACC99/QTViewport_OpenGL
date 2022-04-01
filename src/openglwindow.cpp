@@ -9,7 +9,7 @@
 
 using namespace std::chrono_literals;
 
-MainWindow::MainWindow(const int &example, QWidget *parent) : QOpenGLWidget(parent){
+MainWindow::MainWindow(const int &example, QWidget *parent) : QOpenGLWidget(parent), m_texture(0){
 
     this -> example = example;
     this -> setUpdateBehavior(QOpenGLWidget::NoPartialUpdate);
@@ -29,6 +29,11 @@ MainWindow::MainWindow(const int &example, QWidget *parent) : QOpenGLWidget(pare
 }
 
 MainWindow::~MainWindow() {
+    makeCurrent();
+
+    delete m_texture;
+
+    doneCurrent();
 }
 
 void MainWindow::initializeGL(){ 
@@ -103,5 +108,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
         
         break;
     }
+
+}
+
+
+void MainWindow::load_texture(const std::string &filename, GLuint *texture){
 
 }

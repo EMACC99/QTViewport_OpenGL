@@ -3,7 +3,9 @@
 #include <QString>
 #include <QSurfaceFormat>
 #include <QTimer>
+#include <QImage>
 
+#include <filesystem>
 #ifdef __APPLE__
     #include <OpenGL/glu.h>
 #else
@@ -16,7 +18,7 @@
 #include <QtOpenGL>
 
 constexpr float rotate = 5.f;
-
+namespace fs = std::filesystem;
 class MainWindow : public QOpenGLWidget{
     
     Q_OBJECT
@@ -31,6 +33,7 @@ protected:
 
     void mouseMoveEvent(QMouseEvent *event);
     void keyPressEvent(QKeyEvent *event);
+    void load_texture(const std::string &filename, GLuint *texture);
 
 private:
     QTimer timer;
@@ -40,4 +43,5 @@ private:
     bool auto_rotate = true;
     float initial_roation = 0.f;
     std::array<float, 3> rotate_axis{1.f,1.f,0.f};
+    QOpenGLTexture *m_texture;
 };
