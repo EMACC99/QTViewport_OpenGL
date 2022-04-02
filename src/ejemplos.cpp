@@ -40,23 +40,29 @@ namespace ejemplos{
 
         void ejemplo5_init(){
             /*Lighting*/
+
             glShadeModel(GL_SMOOTH);
             glEnable(GL_DEPTH_TEST); // Enables Depth Testing
             glEnable(GL_LIGHTING);   // Enable Lighting
             glDepthFunc(GL_LEQUAL);  // The Type Of Depth Testing To Do
             glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
             /*Light values*/
+
             GLfloat LightAmbient[]= { 0.5f, 0.5f, 0.5f, 1.0f };
             GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f };
-            GLfloat LightPosition[]= { 0.0f, 0.0f, 2.0f, 1.0f };
+            GLfloat LightPosition[]= { 2.0f, 0.0f, 2.0f, 1.0f };
             /*Setting light values*/
+
             glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
             glLightfv(GL_LIGHT1,GL_DIFFUSE,LightDiffuse);
-            GLfloat red[]= { 1.0f, 0.0f, 0.0f, 1.0f };
+
+            GLfloat red[]= { 1.0f, 1.0f, 1.0f, 1.0f };
             glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
+
             glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);
             glEnable(GL_LIGHT1);
             glEnable(GL_LIGHT0);
+
             /*Setting back-culling*/
             glEnable(GL_CULL_FACE);
             glCullFace(GL_BACK);
