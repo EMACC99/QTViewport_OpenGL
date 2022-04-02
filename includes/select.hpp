@@ -13,6 +13,6 @@ protected:
 
 private:
     Ui::Form ui;
-    QStringList options = {"ejemplo 1", "ejemplo 2", "ejemplo 3", "ejemplo 4", "ejemplo 5"};
+    QStringList options = {"ejemplo 1", "ejemplo 2", "ejemplo 3", "ejemplo 4", "ejemplo 5", "ejemplo 6"};
 
 };

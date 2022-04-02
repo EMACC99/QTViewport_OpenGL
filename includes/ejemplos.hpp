@@ -1,7 +1,9 @@
 #pragma once
 
-#include <array>
+#include "includes/openglwindow.hpp"
 
+#include <array>
+#include <functional>
 #ifdef __APPLE__
     #include <OpenGL/glu.h>
 #else
@@ -11,8 +13,8 @@
 constexpr float rotation_factor =  25.0;
 namespace ejemplos {
 
-    void initialize_ejemplo(const int &ejemplo, int *list);
+    void initialize_ejemplo(MainWindow &mainwindow);
 
-    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation, const std::array<float, 3> &rotate_axis);
+    void ejemplo(MainWindow &mainwindow);
 
 }

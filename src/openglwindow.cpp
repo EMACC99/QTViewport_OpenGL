@@ -1,6 +1,6 @@
 #include "includes/gl_debug.hpp"
-#include "includes/openglwindow.hpp"
 #include "includes/ejemplos.hpp"
+#include "includes/openglwindow.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -38,7 +38,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::initializeGL(){ 
         resizeGL(this->width(), this->height());
-        ejemplos::initialize_ejemplo(this -> example, &(this -> list));
+        ejemplos::initialize_ejemplo(*this);
     }
 
 void MainWindow::resizeGL(int w, int h){
@@ -50,7 +50,7 @@ void MainWindow::resizeGL(int w, int h){
 }
 
 void MainWindow::paintGL(){
-    ejemplos::ejemplo(this -> example, &(this -> list), this -> auto_rotate, &(this -> initial_roation), this -> rotate_axis);
+    ejemplos::ejemplo(*this);
 }
 
 
@@ -63,7 +63,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     case Qt::Key_D:
         // rotate or smth
         this -> auto_rotate = false;
-        this -> initial_roation += rotate;
+        this -> initial_rotation += rotate;
 
         this -> rotate_axis[0] = 0.f;
         this -> rotate_axis[1] = 1.f;
@@ -73,7 +73,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
     case Qt::Key_A:
         this -> auto_rotate = false;
-        this -> initial_roation -= rotate;
+        this -> initial_rotation -= rotate;
         
         this -> rotate_axis[0] = 0.f;
         this -> rotate_axis[1] = 1.f;
@@ -83,7 +83,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
     
     case Qt::Key_W:
         this -> auto_rotate = false;
-        this -> initial_roation += rotate;
+        this -> initial_rotation += rotate;
 
         this -> rotate_axis[0] = 1.f;
         this -> rotate_axis[1] = 0.f;
@@ -93,7 +93,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
     case Qt::Key_S:
         this -> auto_rotate = false;
-        this -> initial_roation -= rotate;
+        this -> initial_rotation -= rotate;
 
         this -> rotate_axis[0] = 1.f;
         this -> rotate_axis[1] = 0.f;
@@ -112,6 +112,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 
 
-void MainWindow::load_texture(const std::string &filename, GLuint *texture){
+void MainWindow::load_texture(const std::string &filename){
+    fs::path path = "assets/" + filename;
+    QImage im;
+    if (! im.load(path.c_str())){
+        std::cerr << "Error loading " << filename << std::endl;
+        exit(EXIT_FAILURE); 
+    }
 
+    m_texture = new QOpenGLTexture(im);
+
+    m_texture -> bind();
 }

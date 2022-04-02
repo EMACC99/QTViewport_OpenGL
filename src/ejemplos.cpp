@@ -69,6 +69,32 @@ namespace ejemplos{
             /*****/
         }
 
+        void ejemplo6_init(){
+            /*Lighting*/
+            glShadeModel(GL_SMOOTH);
+            glEnable(GL_DEPTH_TEST); // Enables Depth Testing
+            glEnable(GL_LIGHTING);   // Enable Lighting
+            glDepthFunc(GL_LEQUAL);  // The Type Of Depth Testing To Do
+            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);// Specify implementation-specific hints, GL_NICEST most correct/highest quality option
+            /*Light values*/
+            GLfloat LightAmbient[]= { 0.5f, 0.5f, 0.5f, 1.0f };
+            GLfloat LightDiffuse[]= { 1.0f, 1.0f, 1.0f, 1.0f };
+            GLfloat LightPosition[]= { 0.0f, 0.0f, 2.0f, 1.0f };
+            /*Setting light values*/
+            glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
+            glLightfv(GL_LIGHT1,GL_DIFFUSE,LightDiffuse);
+            GLfloat red[]= { 1.0f, 0.0f, 0.0f, 1.0f };
+            //glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
+            glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);
+            glEnable(GL_LIGHT1);
+            glEnable(GL_LIGHT0);
+            /*Setting back-culling*/
+            glEnable(GL_CULL_FACE);
+            glCullFace(GL_BACK);
+            /*****/
+            /*Load Texture*/
+        }
+
         void ejemplo1(){
             glMatrixMode(GL_MODELVIEW);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Screen and Depth Buffers
@@ -239,14 +265,14 @@ namespace ejemplos{
         }
     }
 
-    void initialize_ejemplo(const int &ejemplo, int *list){
-        switch (ejemplo){
+    void initialize_ejemplo(MainWindow &mainwindow){
+        switch (mainwindow.example){
         case 1:{
             ejemplo1_init();
             break;
         }
         case 2:{
-            ejemplo2_init(list);
+            ejemplo2_init(&(mainwindow.list));
             break;
         }
         case 3:{
@@ -262,6 +288,10 @@ namespace ejemplos{
             ejemplo5_init();
             break;
         }
+        case 6: {
+            ejemplo6_init();
+            mainwindow.load_texture("texture.bmp");
+        }
         default:{
             // throw "Este ejemplo no existe";
             break;
@@ -269,29 +299,31 @@ namespace ejemplos{
         }
     }
     
-    void ejemplo(const int &ejemplo, int *list, const bool &rotate, float *initial_rotation, const std::array<float, 3> &rotate_axis){
-        switch (ejemplo){
+    void ejemplo(MainWindow &mainwindow){
+        switch (mainwindow.example){
         
         case 1: {
             ejemplo1();
             break;
         }
         case 2: {
-            ejemplo2(list);
+            ejemplo2(&mainwindow.list);
             break;
         }
         case 3: {
             break;
         }
         case 4: {
-            ejemplo4(rotate, initial_rotation, rotate_axis);
+            ejemplo4(mainwindow.auto_rotate, &mainwindow.initial_rotation, mainwindow.rotate_axis);
 
             break;
         }
         case 5: {
-            ejemplo5(rotate, initial_rotation, rotate_axis);
+            ejemplo5(mainwindow.auto_rotate, &mainwindow.initial_rotation, mainwindow.rotate_axis);
             break;
         }
+        case 6:
+            // ejemplo6();
         default: {
             break;
         }
