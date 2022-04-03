@@ -84,7 +84,7 @@ namespace ejemplos{
             glLightfv(GL_LIGHT1, GL_AMBIENT, LightAmbient);
             glLightfv(GL_LIGHT1,GL_DIFFUSE,LightDiffuse);
             GLfloat red[]= { 1.0f, 0.0f, 0.0f, 1.0f };
-            //glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
+            glLightfv( GL_LIGHT0, GL_SPECULAR, red ); // Sets specular component of light 0 to red,
             glLightfv(GL_LIGHT1, GL_POSITION,LightPosition);
             glEnable(GL_LIGHT1);
             glEnable(GL_LIGHT0);
@@ -263,7 +263,9 @@ namespace ejemplos{
             glEnd();                        // Done Drawing The Quad
             glFlush();
         }
+
         void ejemplo6(QOpenGLTexture *texture, float *initial_rotation){
+            glMatrixMode(GL_MODELVIEW);  
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear The Screen And The Depth Buffer
             glLoadIdentity();                   // Reset The View
 
@@ -277,15 +279,19 @@ namespace ejemplos{
             glTranslatef(1.5f,0.0f,-7.0f);              // Move Right And Into The Screen
 
             glRotatef(*initial_rotation,1.0f,1.0f,1.0f);            // Rotate The Cube On X, Y & Z
+            *initial_rotation += rotation_factor;
+
+            texture -> bind();
 
             glEnable(GL_TEXTURE_2D); //Enable use of texture
-                //Texture mapping parameters
-               glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-               glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-               glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-               glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-               glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-               glBindTexture(GL_TEXTURE_2D, texture -> textureId()); //Select texture to use
+            //    //Texture mapping parameters
+            //     glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+            //     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+            //     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+            //     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            //     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            //     glBindTexture(GL_TEXTURE_2D, textureId); //Select texture to use
+
 
             glBegin(GL_QUADS);                  // Start Drawing The Cube
                 glNormal3f( 0.0f, 1.0f, 0.0f);
@@ -315,8 +321,9 @@ namespace ejemplos{
                 glNormal3f( 0.0f, 0.0f, 1.0f);
                 glMaterialfv( GL_FRONT, GL_DIFFUSE, red );// Sets diffuse component of material to red
 
-                glBindTexture(GL_TEXTURE_2D, texture -> textureId());
-                glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL); //Not working, only first call make changes
+                texture -> bind(0);
+                // glBindTexture(GL_TEXTURE_2D, textureId);
+                // glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL); //Not working, only first call make changes
                 //glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
                 //glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
@@ -368,7 +375,6 @@ namespace ejemplos{
             glEnd();                        // Done Drawing The Quad
             glFlush();
 
-            glDisable(GL_TEXTURE_2D);
         }
     }
 
@@ -398,6 +404,7 @@ namespace ejemplos{
         case 6: {
             ejemplo6_init();
             mainwindow.loadTexture("texture.bmp");
+            break;
         }
         default:{
             // throw "Este ejemplo no existe";
@@ -431,6 +438,7 @@ namespace ejemplos{
         }
         case 6:
             ejemplo6(mainwindow.m_texture, &mainwindow.initial_rotation);
+            break;
         default: {
             break;
         }

@@ -103,7 +103,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
     case Qt::Key_R:
         this -> auto_rotate = true;
-        for (int i = 0; i < this -> rotate_axis.size(); ++i)
+        for (unsigned long i = 0; i < this -> rotate_axis.size(); ++i)
             this -> rotate_axis[i] = 1.f;
         
         break;
@@ -114,12 +114,19 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 
 void MainWindow::loadTexture(const std::string &filename){
     fs::path path = "assets/" + filename;
-    QImage im;
-    if (! im.load(path.c_str())){
-        std::cerr << "Error loading " << filename << std::endl;
-        exit(EXIT_FAILURE); 
+    path = fs::absolute(path);
+
+    m_texture = new QOpenGLTexture(QImage(path.c_str()));
+    if (!m_texture -> isCreated()){
+        std::cerr << "Failed to load texture" << std::endl;
+        exit(EXIT_FAILURE);
     }
+    m_texture -> setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
+    m_texture -> setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
 
-    this -> m_texture = new QOpenGLTexture(im);
+    m_texture -> setMinificationFilter(QOpenGLTexture::Linear);
+    m_texture -> setMagnificationFilter(QOpenGLTexture::Linear);
 
+
+    
 }
