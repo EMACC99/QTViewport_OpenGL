@@ -284,6 +284,7 @@ namespace ejemplos{
             texture -> bind();
 
             glEnable(GL_TEXTURE_2D); //Enable use of texture
+            // This is now all in the MainWindow::loadTexture function and replaced with the QOpenGLTexture bc QGLWidget is now removed
             //    //Texture mapping parameters
             //     glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
             //     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
