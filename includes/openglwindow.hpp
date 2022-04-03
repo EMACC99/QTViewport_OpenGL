@@ -25,7 +25,7 @@ class MainWindow : public QOpenGLWidget{
 public:
     MainWindow(const int &example, QWidget *parent = 0);
     ~MainWindow();
-    void load_texture(const std::string &filename);
+    void loadTexture(const std::string &filename);
     int list;
     int example;
     bool auto_rotate = true;

@@ -112,7 +112,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event){
 }
 
 
-void MainWindow::load_texture(const std::string &filename){
+void MainWindow::loadTexture(const std::string &filename){
     fs::path path = "assets/" + filename;
     QImage im;
     if (! im.load(path.c_str())){
@@ -120,7 +120,6 @@ void MainWindow::load_texture(const std::string &filename){
         exit(EXIT_FAILURE); 
     }
 
-    m_texture = new QOpenGLTexture(im);
+    this -> m_texture = new QOpenGLTexture(im);
 
-    m_texture -> bind();
 }

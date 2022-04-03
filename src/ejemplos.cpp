@@ -263,6 +263,113 @@ namespace ejemplos{
             glEnd();                        // Done Drawing The Quad
             glFlush();
         }
+        void ejemplo6(QOpenGLTexture *texture, float *initial_rotation){
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear The Screen And The Depth Buffer
+            glLoadIdentity();                   // Reset The View
+
+            GLfloat red[] = {1.0f, 0.0f, 0.0f, 1.0f};
+            GLfloat green[]={0.0f,1.0f,0.0f,1.0f};
+            GLfloat blue[]={0.0f,0.0f,1.0f,1.0f};
+            GLfloat orange[]={1.0f,0.5f,0.0f,1.0f};
+            GLfloat yellow[]={1.0f,1.0f,0.0f,1.0f};
+            GLfloat violet[]={1.0f,0.0f,1.0f,1.0f};
+
+            glTranslatef(1.5f,0.0f,-7.0f);              // Move Right And Into The Screen
+
+            glRotatef(*initial_rotation,1.0f,1.0f,1.0f);            // Rotate The Cube On X, Y & Z
+
+            glEnable(GL_TEXTURE_2D); //Enable use of texture
+                //Texture mapping parameters
+               glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+               glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+               glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+               glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+               glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+               glBindTexture(GL_TEXTURE_2D, texture -> textureId()); //Select texture to use
+
+            glBegin(GL_QUADS);                  // Start Drawing The Cube
+                glNormal3f( 0.0f, 1.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, green ); // Sets diffuse component of material to green
+
+                glTexCoord2f(0.0f,1.0f);
+                glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Top)
+                glTexCoord2f(0.0f,0.0f);
+                glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Top)
+                glTexCoord2f(1.0f,0.0f);
+                glVertex3f(-1.0f, 1.0f, 1.0f);          // Bottom Left Of The Quad (Top)
+                glTexCoord2f(0.0f,1.0f);
+                glVertex3f( 1.0f, 1.0f, 1.0f);          // Bottom Right Of The Quad (Top)
+
+                glNormal3f( 0.0f,-1.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, orange );// Sets diffuse component of material to orange
+
+                glTexCoord2f(0.0f,0.0f);
+                glVertex3f( 1.0f,-1.0f, 1.0f);          // Top Right Of The Quad (Bottom)
+                glTexCoord2f(1.0f,0.0f);
+                glVertex3f(-1.0f,-1.0f, 1.0f);          // Top Left Of The Quad (Bottom)
+                glTexCoord2f(1.5f,0.0f);
+                glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Bottom)
+                glTexCoord2f(1.5f,1.5f);
+                glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Bottom)
+
+                glNormal3f( 0.0f, 0.0f, 1.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, red );// Sets diffuse component of material to red
+
+                glBindTexture(GL_TEXTURE_2D, texture -> textureId());
+                glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL); //Not working, only first call make changes
+                //glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+                //glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+
+
+                glTexCoord2f(0.0f,0.0f);
+                glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Front)
+                glTexCoord2f(1.5f,0.0f);
+                glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Front)
+                glTexCoord2f(1.5f,1.5f);
+                glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Front)
+                glTexCoord2f(0.0f,1.5f);
+                glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Front) 
+
+                glNormal3f( 0.0f, 0.0f,-1.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, yellow );// Sets diffuse component of material to yellow
+
+                glTexCoord2f(1.0f,0.0f);
+                glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Back)
+                glTexCoord2f(1.0f,1.0f);
+                glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Back)
+                glTexCoord2f(0.0f,1.0f);
+                glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Back)
+                glTexCoord2f(0.0f,0.0f);
+                glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Back)  
+
+                glNormal3f(-1.0f, 0.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, blue );// Sets diffuse component of material to blue
+
+                glTexCoord2f(0.0f,0.0f);
+                glVertex3f(-1.0f, 1.0f, 1.0f);          // Top Right Of The Quad (Left)
+                glTexCoord2f(1.0f,0.0f);
+                glVertex3f(-1.0f, 1.0f,-1.0f);          // Top Left Of The Quad (Left)
+                glTexCoord2f(1.0f,1.0f);
+                glVertex3f(-1.0f,-1.0f,-1.0f);          // Bottom Left Of The Quad (Left)
+                glTexCoord2f(0.0f,1.0f);
+                glVertex3f(-1.0f,-1.0f, 1.0f);          // Bottom Right Of The Quad (Left)
+
+                glNormal3f( 1.0f, 0.0f, 0.0f);
+                glMaterialfv( GL_FRONT, GL_DIFFUSE, violet );// Sets diffuse component of material to violet
+
+                glTexCoord2f(1.0f,0.0f);
+                glVertex3f( 1.0f, 1.0f,-1.0f);          // Top Right Of The Quad (Right)
+                glTexCoord2f(1.0f,1.0f);
+                glVertex3f( 1.0f, 1.0f, 1.0f);          // Top Left Of The Quad (Right)
+                glTexCoord2f(0.0f,1.0f);
+                glVertex3f( 1.0f,-1.0f, 1.0f);          // Bottom Left Of The Quad (Right)
+                glTexCoord2f(1.0f,1.0f);
+                glVertex3f( 1.0f,-1.0f,-1.0f);          // Bottom Right Of The Quad (Right)
+            glEnd();                        // Done Drawing The Quad
+            glFlush();
+
+            glDisable(GL_TEXTURE_2D);
+        }
     }
 
     void initialize_ejemplo(MainWindow &mainwindow){
@@ -290,7 +397,7 @@ namespace ejemplos{
         }
         case 6: {
             ejemplo6_init();
-            mainwindow.load_texture("texture.bmp");
+            mainwindow.loadTexture("texture.bmp");
         }
         default:{
             // throw "Este ejemplo no existe";
@@ -323,7 +430,7 @@ namespace ejemplos{
             break;
         }
         case 6:
-            // ejemplo6();
+            ejemplo6(mainwindow.m_texture, &mainwindow.initial_rotation);
         default: {
             break;
         }
