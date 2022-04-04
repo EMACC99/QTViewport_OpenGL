@@ -28,4 +28,6 @@ else{
 	LIBS += -lGL -lglut -lGLU
 }
 
+win32:QMAKE_CXXFLAGS -=  -Wno-deprecated-declarations
+
 TARGET = openglwindow
