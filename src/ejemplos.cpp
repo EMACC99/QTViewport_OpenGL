@@ -281,17 +281,18 @@ namespace ejemplos{
             glRotatef(*initial_rotation,1.0f,1.0f,1.0f);            // Rotate The Cube On X, Y & Z
             *initial_rotation += rotation_factor;
 
-            texture -> bind();
+            // texture -> bind();
+            GLuint textureId = texture->textureId();
 
             glEnable(GL_TEXTURE_2D); //Enable use of texture
             // This is now all in the MainWindow::loadTexture function and replaced with the QOpenGLTexture bc QGLWidget is now removed
             //    //Texture mapping parameters
-            //     glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-            //     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-            //     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
-            //     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            //     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            //     glBindTexture(GL_TEXTURE_2D, textureId); //Select texture to use
+                glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glBindTexture(GL_TEXTURE_2D, textureId); //Select texture to use
 
 
             glBegin(GL_QUADS);                  // Start Drawing The Cube
@@ -322,11 +323,11 @@ namespace ejemplos{
                 glNormal3f( 0.0f, 0.0f, 1.0f);
                 glMaterialfv( GL_FRONT, GL_DIFFUSE, red );// Sets diffuse component of material to red
 
-                texture -> bind(0);
-                // glBindTexture(GL_TEXTURE_2D, textureId);
-                // glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL); //Not working, only first call make changes
-                //glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
-                //glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
+                // texture -> bind(0);
+                glBindTexture(GL_TEXTURE_2D, textureId);
+                glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL); //Not working, only first call make changes
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP );
 
 
                 glTexCoord2f(0.0f,0.0f);

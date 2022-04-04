@@ -121,11 +121,11 @@ void MainWindow::loadTexture(const std::string &filename){
         std::cerr << "Failed to load texture" << std::endl;
         exit(EXIT_FAILURE);
     }
-    m_texture -> setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
-    m_texture -> setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
+    // m_texture -> setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::Repeat);
+    // m_texture -> setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::Repeat);
 
-    m_texture -> setMinificationFilter(QOpenGLTexture::Linear);
-    m_texture -> setMagnificationFilter(QOpenGLTexture::Linear);
+    // m_texture -> setMinificationFilter(QOpenGLTexture::Linear);
+    // m_texture -> setMagnificationFilter(QOpenGLTexture::Linear);
 
 
     
