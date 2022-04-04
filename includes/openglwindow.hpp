@@ -5,18 +5,22 @@
 #include <QTimer>
 #include <QImage>
 
+#include<array>
 #include <filesystem>
+#ifdef _WIN32
+    #include <windows.h>
+#endif
 #ifdef __APPLE__
     #include <OpenGL/glu.h>
 #else
     #include <GL/glu.h>
 #endif
 
+
 #include <QOpenGLFunctions>
 #include <QOpenGLWindow>
 #include <QOpenGLWidget>
 #include <QtOpenGL>
-
 constexpr float rotate = 5.f;
 namespace fs = std::filesystem;
 class MainWindow : public QOpenGLWidget{

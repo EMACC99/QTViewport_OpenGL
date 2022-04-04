@@ -2,7 +2,6 @@
 
 #include "includes/openglwindow.hpp"
 
-#include <array>
 #include <functional>
 #ifdef __APPLE__
     #include <OpenGL/glu.h>
