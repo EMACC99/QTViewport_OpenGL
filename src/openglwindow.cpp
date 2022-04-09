@@ -116,7 +116,7 @@ void MainWindow::loadTexture(const std::string &filename){
     fs::path path = "assets/" + filename;
     path = fs::absolute(path);
 
-    m_texture = new QOpenGLTexture(QImage(path.c_str()));
+    std::unique_ptr<QOpenGLTexture> m_texture( new QOpenGLTexture(QImage(path.c_str())));
     if (!m_texture -> isCreated()){
         std::cerr << "Failed to load texture" << std::endl;
         exit(EXIT_FAILURE);
